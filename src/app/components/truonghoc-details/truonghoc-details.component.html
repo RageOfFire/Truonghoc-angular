@@ -1,0 +1,91 @@
+<div *ngIf="viewMode; else editable">
+    <div *ngIf="currentTruonghoc.masv">
+      <h4>Trường học</h4>
+      <div>
+        <label><strong>Tên sinh viên:</strong></label> {{ currentTruonghoc.tensv }}
+      </div>
+      <div>
+        <label><strong>Điểm:</strong></label>
+        {{ currentTruonghoc.diem }}
+      </div>
+      <div>
+        <label><strong>Trạng thái:</strong></label>
+        {{ currentTruonghoc.dadonghocphi ? "Đã đóng" : "Đang xử lý" }}
+      </div>
+      <div>
+        <label><strong>Điểm trung bình:</strong></label>
+        {{ currentTruonghoc.diemtb }}
+      </div>
+      <a
+        class="badge badge-warning"
+        routerLink="/truonghoc/{{ currentTruonghoc.masv }}"
+      >
+        Edit
+      </a>
+    </div>
+    <div *ngIf="!currentTruonghoc">
+      <br />
+      <p>Please click on a Truonghoc...</p>
+    </div>
+  </div>
+  <ng-template #editable>
+    <div *ngIf="currentTruonghoc.masv" class="edit-form">
+      <h4>Trường học</h4>
+      <form>
+        <div class="form-group">
+          <label for="tensv">Tên sinh viên</label>
+          <input
+            type="text"
+            class="form-control"
+            id="tensv"
+            [(ngModel)]="currentTruonghoc.tensv"
+            name="tensv"
+          />
+        </div>
+        <div class="form-group">
+          <label for="diem">Điểm</label>
+          <input
+            type="text"
+            class="form-control"
+            id="diem"
+            [(ngModel)]="currentTruonghoc.diem"
+            name="diem"
+          />
+        </div>
+        <div class="form-group">
+            <label><strong>Trạng thái:</strong></label>
+            {{ currentTruonghoc.dadonghocphi ? "Đã đóng" : "Đang xử lý" }}
+        </div>
+      </form>
+      <button
+        class="badge badge-primary mr-2"
+        *ngIf="currentTruonghoc.dadonghocphi"
+        (click)="updateDaDongHocPhi(false)"
+      >
+        Hủy đóng
+      </button>
+      <button
+        *ngIf="!currentTruonghoc.dadonghocphi"
+        class="badge badge-primary mr-2"
+        (click)="updateDaDongHocPhi(true)"
+      >
+        Đã đóng
+      </button>
+      <button class="badge badge-danger mr-2" (click)="deleteTruonghoc()">
+        Xóa
+      </button>
+      <button
+        type="submit"
+        class="badge badge-success mb-2"
+        (click)="updateTruonghoc()"
+      >
+        Cập nhật
+      </button>
+      <p>{{ message }}</p>
+    </div>
+    <div *ngIf="!currentTruonghoc.masv">
+      <br />
+      <p>Cannot access this Truonghoc...</p>
+    </div>
+  </ng-template>
+  

@@ -1,0 +1,43 @@
+<div>
+    <div class="submit-form">
+      <div *ngIf="!submitted">
+        <div class="form-group">
+          <label for="tensv">Tên sinh viên</label>
+          <input
+            type="text"
+            class="form-control"
+            id="tensv"
+            required
+            [(ngModel)]="truonghoc.tensv"
+            name="tensv"
+          />
+        </div>
+        <div class="form-group">
+          <label for="diem">Điểm</label>
+          <input
+            class="form-control"
+            id="diem"
+            required
+            [(ngModel)]="truonghoc.diem"
+            name="diem"
+          />
+        </div>
+        <div class="form-group">
+            <label for="tenlop">Tên lớp</label>
+            <input
+              class="form-control"
+              id="tenlop"
+              required
+              [(ngModel)]="truonghoc.tenlop"
+              name="tenlop"
+            />
+          </div>
+        <button (click)="saveTruonghoc()" class="btn btn-success">Nhập</button>
+      </div>
+      <div *ngIf="submitted">
+        <h4>Thêm trường học thành công!</h4>
+        <button class="btn btn-success" (click)="newTruonghoc()">Thêm</button>
+      </div>
+    </div>
+  </div>
+  
